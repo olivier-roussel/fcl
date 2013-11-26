@@ -7,4 +7,9 @@ endif()
 
 target_link_libraries(${PROJECT_NAME} ${CCD_LIBRARIES} ${OCTOMAP_LIBRARIES} ${Boost_LIBRARIES})
 
+# Build Debug and Release versions of the lib under MSVC
+if(MSVC)
+  set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_OUTPUT_NAME "${PROJECT_NAME}d" RELEASE_OUTPUT_NAME "${PROJECT_NAME}")
+endif(MSVC)
+
 install(TARGETS ${PROJECT_NAME} ARCHIVE DESTINATION lib/ LIBRARY DESTINATION lib/)
