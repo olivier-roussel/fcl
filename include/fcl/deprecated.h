@@ -1,7 +1,7 @@
 /*
  * Software License Agreement (BSD License)
  *
- *  Copyright (c) 2012, Willow Garage, Inc.
+ *  Copyright (c) 2013, CNRS-LAAS.
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -32,20 +32,37 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef FCL_CONFIG_
-#define FCL_CONFIG_
+/// \author Florent Lamiraux
 
-#define FCL_VERSION "@FCL_VERSION@"
-#define FCL_MAJOR_VERSION @FCL_MAJOR_VERSION@
-#define FCL_MINOR_VERSION @FCL_MINOR_VERSION@
-#define FCL_PATCH_VERSION @FCL_PATCH_VERSION@
+#ifndef FCL_DEPRECATED_HH
+# define FCL_DEPRECATED_HH
 
-#cmakedefine01 FCL_HAVE_SSE
-#cmakedefine01 FCL_HAVE_OCTOMAP
-#cmakedefine01 FCL_HAVE_FLANN
-#cmakedefine01 FCL_HAVE_TINYXML
+// Define a suffix which can be used to tag a type, a function or a a
+// variable as deprecated (i.e. it will emit a warning when using it).
+//
+// Tagging a function as deprecated:
+//  void foo () FCL_DEPRECATED;
+//
+// Tagging a type as deprecated:
+//  class Foo {};
+//  typedef Foo Bar FCL_DEPRECATED;
+//
+// Tagging a variable as deprecated:
+//  int a FCL_DEPRECATED = 0;
+//
+// The use of a macro is required as this is /not/ a standardized
+// feature of C++ language or preprocessor, even if most of the
+// compilers support it.
+# ifdef __GNUC__
+#  define FCL_DEPRECATED __attribute__ ((deprecated))
+# elif defined _MSC_VER
+#  define FCL_DEPRECATED __declspec (deprecated)
+# elif defined(clang)
+#  define FL_DEPRECATED \
+  attribute((deprecated("FCL: Use of this method is deprecated")))
+# else
+// If the compiler is not recognized, drop the feature.
+#  define FCL_DEPRECATED /* nothing */
+# endif
 
-#cmakedefine01 FCL_BUILD_TYPE_DEBUG
-#cmakedefine01 FCL_BUILD_TYPE_RELEASE
-
-#endif
+#endif //! FCL_DEPRECATED_HH
