@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(distance_capsulecapsule_transformXY)
   std::cerr << "applied transformation of two caps: " << transform.getTranslation() << " & " << transform2.getTranslation() << std::endl;
   std::cerr << "computed points in caps to caps" << closest_p1 << " & " << closest_p2 << "with dist: " << dist << std::endl;
 
-  float expected = sqrt(800) - 10;
+  float expected = sqrt(800.) - 10;
   BOOST_CHECK(fabs(expected-dist) < 0.01);
   BOOST_CHECK(res);
 
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(distance_capsulecapsule_transformZ2)
   Transform3f transform2;
   transform2 = Transform3f(Vec3f(0,0,25.1));
   Matrix3f rot2;
-  rot2.setEulerZYX(0,M_PI_2,0);
+  rot2.setEulerZYX(0,3.14159265359 / 2.,0);
   transform2.setRotation(rot2);
 
   bool res;

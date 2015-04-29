@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(distance_capsule_box)
   fcl::DistanceResult distanceResult;
 
   // Rotate capsule around y axis by pi/2 and move it behind box
-  fcl::Transform3f tf1 (fcl::Quaternion3f (sqrt(2)/2, 0, sqrt(2)/2, 0),
+  fcl::Transform3f tf1 (fcl::Quaternion3f (sqrt(2.)/2, 0, sqrt(2.)/2, 0),
 			fcl::Vec3f (-10., 0.8, 1.5));
   fcl::Transform3f tf2;
   fcl::CollisionObject capsule (capsuleGeometry, tf1);

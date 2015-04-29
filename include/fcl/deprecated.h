@@ -55,8 +55,8 @@
 // compilers support it.
 # ifdef __GNUC__
 #  define FCL_DEPRECATED __attribute__ ((deprecated))
-# elif defined _MSC_VER
-#  define FCL_DEPRECATED __declspec (deprecated)
+//# elif defined _MSC_VER
+//#  define FCL_DEPRECATED __declspec (deprecated)
 # elif defined(clang)
 #  define FL_DEPRECATED \
   attribute((deprecated("FCL: Use of this method is deprecated")))
